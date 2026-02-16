@@ -6,7 +6,7 @@
   background-image: url("../Assets/banner-image.png");
 }
 
-.a.active {
+.active {
     color: #0004ff;
     font-weight: bold;
 }

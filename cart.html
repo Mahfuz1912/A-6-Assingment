@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart - SwiftCart</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav id="navbar"></nav>
+
+    <!-- Cart Content -->
+    <section class="py-12 flex-1">
+      <div class="max-w-6xl mx-auto px-4">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">Shopping Cart</h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Cart Items -->
+          <div class="lg:col-span-2">
+            <div id="cart-items" class="space-y-4">
+              <!-- Cart items will be loaded here -->
+            </div>
+            <div id="empty-cart" class="hidden text-center py-16">
+              <i class="fas fa-shopping-cart text-6xl text-gray-300 mb-4"></i>
+              <p class="text-gray-500 text-xl">Your cart is empty</p>
+              <a href="./product.html" class="btn btn-primary mt-4"
+                >Continue Shopping</a
+              >
+            </div>
+          </div>
+
+          <!-- Order Summary -->
+          <div class="lg:col-span-1">
+            <div class="bg-white rounded-xl shadow-md p-6 sticky top-4">
+              <h2 class="text-xl font-bold text-gray-800 mb-4">
+                Order Summary
+              </h2>
+              <div class="space-y-3 mb-6">
+                <div class="flex justify-between">
+                  <span class="text-gray-600"
+                    >Items (<span id="total-items">0</span>)</span
+                  >
+                  <span id="items-total">$0.00</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Shipping</span>
+                  <span class="text-green-600">Free</span>
+                </div>
+                <hr />
+                <div class="flex justify-between text-lg font-bold">
+                  <span>Total</span>
+                  <span id="cart-total" class="text-indigo-600">$0.00</span>
+                </div>
+              </div>
+              <button class="btn btn-primary w-full">
+                Proceed to Checkout
+              </button>
+              <button
+                id="clear-cart"
+                class="btn btn-outline btn-error w-full mt-3"
+              >
+                Clear Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-gray-800 text-white py-12"></footer>
+
+    <script src="./components.js"></script>
+    <script>
+      // Load cart from localStorage
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const renderCart = () => {
+        const cartContainer = document.getElementById("cart-items");
+        const emptyCart = document.getElementById("empty-cart");
+
+        if (cart.length === 0) {
+          cartContainer.classList.add("hidden");
+          emptyCart.classList.remove("hidden");
+          updateSummary();
+          updateNavbarCart();
+          return;
+        }
+
+        cartContainer.classList.remove("hidden");
+        emptyCart.classList.add("hidden");
+
+        cartContainer.innerHTML = cart
+          .map(
+            (item) => `
+          <div class="bg-white rounded-xl shadow-md p-4 flex gap-4" data-id="${item.id}">
+            <div class="w-24 h-24 bg-gray-100 rounded-lg flex items-center justify-center p-2">
+              <img src="${item.image}" alt="${item.title}" class="max-h-full object-contain">
+            </div>
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-800 line-clamp-2">${item.title}</h3>
+              <p class="text-sm text-gray-500">${item.category}</p>
+              <div class="flex items-center justify-between mt-2">
+                <span class="text-lg font-bold text-indigo-600">$${item.price}</span>
+                <div class="flex items-center gap-2">
+                  <button onclick="updateQuantity(${item.id}, -1)" class="btn btn-sm btn-circle btn-outline">-</button>
+                  <span class="font-semibold w-8 text-center">${item.quantity}</span>
+                  <button onclick="updateQuantity(${item.id}, 1)" class="btn btn-sm btn-circle btn-outline">+</button>
+                  <button onclick="removeItem(${item.id})" class="btn btn-sm btn-circle btn-error btn-outline ml-2">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `,
+          )
+          .join("");
+
+        updateSummary();
+        updateNavbarCart();
+      };
+
+      const updateQuantity = (id, change) => {
+        const item = cart.find((item) => item.id === id);
+        if (item) {
+          item.quantity += change;
+          if (item.quantity <= 0) {
+            removeItem(id);
+            return;
+          }
+          saveCart();
+          renderCart();
+        }
+      };
+
+      const removeItem = (id) => {
+        cart = cart.filter((item) => item.id !== id);
+        saveCart();
+        renderCart();
+      };
+
+      const saveCart = () => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+      };
+
+      const updateSummary = () => {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const totalPrice = cart.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0,
+        );
+
+        document.getElementById("total-items").textContent = totalItems;
+        document.getElementById("items-total").textContent =
+          `$${totalPrice.toFixed(2)}`;
+        document.getElementById("cart-total").textContent =
+          `$${totalPrice.toFixed(2)}`;
+      };
+
+      document.getElementById("clear-cart").addEventListener("click", () => {
+        if (confirm("Are you sure you want to clear your cart?")) {
+          cart = [];
+          saveCart();
+          renderCart();
+        }
+      });
+
+      // Wait for navbar to load, then render cart
+      document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => renderCart(), 100);
+      });
+    </script>
+  </body>
+</html>

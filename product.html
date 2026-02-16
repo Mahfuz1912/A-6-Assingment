@@ -23,259 +23,46 @@
     />
   </head>
   <body>
-    <!-- Navbar Section Start-->
-    <section class="w-11/12 mx-auto">
-      <div class="navbar bg-base-100">
-        <div class="navbar-start">
-          <a class="btn btn-ghost text-xl text-primary font-bold">SwiftCart</a>
-        </div>
-
-        <!-- Desktop Menu (Hidden on mobile) -->
-        <div class="navbar-center hidden lg:flex">
-          <ul class="menu menu-horizontal px-1">
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./product.html">Products</a></li>
-            <li><a href="#categories">Categories</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-
-        <div class="navbar-end">
-          <div class="flex-none">
-            <!-- Shopping Cart -->
-            <div class="dropdown dropdown-end">
-              <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-                <div class="indicator">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                  <span class="badge badge-sm indicator-item">8</span>
-                </div>
-              </div>
-              <div
-                tabindex="0"
-                class="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow"
-              >
-                <div class="card-body">
-                  <span class="text-lg font-bold">8 Items</span>
-                  <span class="text-info">Subtotal: $999</span>
-                  <div class="card-actions">
-                    <button class="btn btn-primary btn-block">View cart</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Hamburger Menu (Visible only on mobile/tablet) -->
-            <div class="dropdown dropdown-end lg:hidden">
-              <div
-                tabindex="0"
-                role="button"
-                class="btn btn-ghost btn-circle"
-                title="Menu"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4 6h16M4 12h8m-8 6h16"
-                  />
-                </svg>
-              </div>
-
-              <ul
-                tabindex="0"
-                class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow right-0"
-              >
-                <li><a href="#home">Home</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#categories">Categories</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li class="divider my-1"></li>
-                <li><a href="#account">My Account</a></li>
-                <li><a href="#settings">Settings</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Navbar Section End -->
+    <!-- Navbar -->
+    <nav id="navbar"></nav>
 
     <!-- Product Details Section Start -->
     <section>
-        <h1 class="text-3xl font-bold text-center my-8">Our Products</h1>
-        <div class="flex justify-center gap-3 mb-8" id="category-container">
+      <h1 class="text-3xl font-bold text-center my-8">Our Products</h1>
+      <div class="flex justify-center gap-3 mb-8" id="category-container"></div>
 
-
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-11/12 mx-auto mb-12" id="product-container">
-
-        </div>
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-11/12 mx-auto mb-12"
+        id="product-container"
+      ></div>
     </section>
     <!-- Product Details Section End -->
 
-    <!-- Footer Section Start -->
-    <footer class="bg-gray-800 text-white py-12">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <!-- About -->
-          <div>
-            <h3 class="text-xl font-bold mb-4 text-primary">SwiftCart</h3>
-            <p class="text-gray-400">
-              Your one-stop shop for all your fashion and lifestyle needs.
-              Quality products, fast delivery, and excellent support.
-            </p>
-          </div>
+    <!-- Footer -->
+    <footer id="footer" class="bg-gray-800 text-white py-12"></footer>
 
-          <!-- Quick Links -->
-          <div>
-            <h4 class="text-lg font-semibold mb-4">QUICK LINKS</h4>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  href="index.html"
-                  class="text-gray-400 hover:text-white transition"
-                  >Home</a
-                >
-              </li>
-              <li>
-                <a
-                  href="products.html"
-                  class="text-gray-400 hover:text-white transition"
-                  >Products</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#about"
-                  class="text-gray-400 hover:text-white transition"
-                  >About</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#contact"
-                  class="text-gray-400 hover:text-white transition"
-                  >Contact</a
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Support -->
-          <div>
-            <h4 class="text-lg font-semibold mb-4">SUPPORT</h4>
-            <ul class="space-y-2">
-              <li>
-                <a href="#faq" class="text-gray-400 hover:text-white transition"
-                  >FAQ</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#shipping"
-                  class="text-gray-400 hover:text-white transition"
-                  >Shipping</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#returns"
-                  class="text-gray-400 hover:text-white transition"
-                  >Returns</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#privacy"
-                  class="text-gray-400 hover:text-white transition"
-                  >Privacy Policy</a
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Newsletter -->
-          <div>
-            <h4 class="text-lg font-semibold mb-4">
-              SUBSCRIBE TO OUR NEWSLETTER
-            </h4>
-            <p class="text-gray-400 mb-4">
-              The latest news, articles, and resources, sent to your inbox
-              weekly.
-            </p>
-            <form id="newsletterForm" class="space-y-3">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                class="w-full px-4 py-2 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                required
-              />
-              <button
-                type="submit"
-                class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-
-        <!-- Social Links & Copyright -->
-        <div class="border-t border-gray-700 mt-8 pt-8">
-          <div class="flex flex-col md:flex-row justify-between items-center">
-            <p class="text-gray-400 text-center">
-              &copy; 2025 SwiftCart, Inc. All rights reserved.
-            </p>
-            <div class="flex space-x-6 mb-4 md:mb-0">
-              <a href="#" class="text-white text-2xl transition" title="Twitter"
-                ><i class="fa-brands fa-twitter"></i
-              ></a>
-              <a
-                href="#"
-                class="text-white text-2xl transition"
-                title="Facebook"
-                ><i class="fa-brands fa-facebook"></i
-              ></a>
-              <a href="#" class="text-white text-2xl" title="Instagram"
-                ><i class="fa-brands fa-instagram"></i
-              ></a>
-              <a
-                href="#"
-                class="text-white text-2xl transition"
-                title="LinkedIn"
-                ><i class="fa-brands fa-linkedin-in"></i
-              ></a>
-              <a href="#" class="text-white text-2xl" title="Email"
-                ><i class="fa-regular fa-envelope"></i
-              ></a>
-            </div>
+    <!-- Details Modal -->
+    <div
+      id="productModal"
+      class="fixed inset-0 bg-slate-500 bg-opacity-50 hidden z-50 overflow-y-auto"
+    >
+      <div class="min-h-screen px-4 flex items-center justify-center">
+        <div
+          class="bg-white rounded-lg max-w-4xl w-full p-8 relative modal-animation"
+        >
+          <button
+            id="closeProductModal"
+            class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-3xl"
+          >
+            &times;
+          </button>
+          <div id="productDetails" class="mt-4">
+            <!-- Product details will be loaded here -->
           </div>
         </div>
       </div>
-    </footer>
-    <!-- Footer Section End -->
+    </div>
+    <script src="./components.js"></script>
     <script src="./index.js"></script>
-
   </body>
 </html>
