@@ -2,6 +2,22 @@ const activeClasses = "bg-indigo-600 text-white";
 const normalClasses =
   "px-4 py-1 border rounded-full text-sm text-gray-600 hover:bg-indigo-600 hover:text-white transition";
 
+// Loading spinner functions
+const showLoader = (containerId) => {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = `
+    <div class="col-span-full flex justify-center items-center py-16">
+      <span class="loading loading-spinner loading-lg text-indigo-600"></span>
+    </div>
+  `;
+};
+
+const hideLoader = (containerId) => {
+  const container = document.getElementById(containerId);
+  if (container) container.innerHTML = "";
+};
+
 const createProductCard = (product) => {
   const productCard = document.createElement("div");
   productCard.className = "w-full";
@@ -64,6 +80,7 @@ const createProductCard = (product) => {
 };
 
 const allProducts = () => {
+  showLoader("product-container");
   fetch("https://fakestoreapi.com/products")
     .then((response) => response.json())
     .then((data) => displayAllProducts(data));
@@ -102,7 +119,7 @@ const displayCategories = (categories) => {
   allBtn.classList.add("bg-indigo-600", "text-white");
   allBtn.addEventListener("click", () => {
     setActive(allBtn);
-
+    showLoader("product-container");
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((data) => displayAllProducts(data));
@@ -118,7 +135,7 @@ const displayCategories = (categories) => {
 
     categoryBtn.addEventListener("click", () => {
       setActive(categoryBtn);
-
+      showLoader("product-container");
       fetch(`https://fakestoreapi.com/products/category/${category}`)
         .then((res) => res.json())
         .then((data) => displayAllProducts(data));
@@ -129,6 +146,7 @@ const displayCategories = (categories) => {
 };
 
 const trendingProducts = () => {
+  showLoader("trending-products");
   fetch("https://fakestoreapi.com/products")
     .then((response) => response.json())
     .then((data) => displayTrandingProducts(data));
@@ -140,6 +158,7 @@ const displayTrandingProducts = (products) => {
     .slice(0, 3);
   const trendingProductsContainer =
     document.getElementById("trending-products");
+  trendingProductsContainer.innerHTML = ""; // Clear spinner
   sortedProducts.forEach((product) =>
     trendingProductsContainer.appendChild(createProductCard(product)),
   );
