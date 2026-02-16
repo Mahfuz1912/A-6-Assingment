@@ -1,0 +1,11 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.hero-banner {
+  background-image: url("../Assets/banner-image.png");
+}
+
+.a.active {
+    color: #0004ff;
+}
