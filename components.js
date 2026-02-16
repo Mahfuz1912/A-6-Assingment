@@ -1,5 +1,5 @@
 // Shared Navbar Component
-function loadNavbar() {
+const loadNavbar = () => {
   const navbar = `
     <section class="w-11/12 mx-auto">
       <div class="navbar bg-base-100">
@@ -30,7 +30,7 @@ function loadNavbar() {
                   <span class="badge badge-sm indicator-item">0</span>
                 </div>
               </div>
-              <div tabindex="0" class="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow">
+              <div tabindex="0" class="card card-compact dropdown-content bg-base-100 z-50 mt-3 w-52 shadow">
                 <div class="card-body">
                   <span id="cart-items-count" class="text-lg font-bold">0 Items</span>
                   <span id="cart-subtotal" class="text-info">Subtotal: $0</span>
@@ -48,7 +48,7 @@ function loadNavbar() {
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
                 </svg>
               </div>
-              <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow right-0">
+              <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow right-0">
                 <li><a href="./index.html">Home</a></li>
                 <li><a href="./product.html">Products</a></li>
                 <li><a href="./cart.html">Cart</a></li>
@@ -64,10 +64,10 @@ function loadNavbar() {
 
   document.getElementById("navbar").innerHTML = navbar;
   updateNavbarCart();
-}
+};
 
 // Shared Footer Component
-function loadFooter() {
+const loadFooter = () => {
   const footer = `
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -130,10 +130,10 @@ function loadFooter() {
   `;
 
   document.getElementById("footer").innerHTML = footer;
-}
+};
 
 // Update navbar cart badge from localStorage
-function updateNavbarCart() {
+const updateNavbarCart = () => {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = cart.reduce(
@@ -150,10 +150,12 @@ function updateNavbarCart() {
   if (itemsCount) itemsCount.textContent = `${totalItems} Items`;
   if (cartSubtotal)
     cartSubtotal.textContent = `Subtotal: $${subtotal.toFixed(2)}`;
-}
+};
+
+// Make updateNavbarCart globally accessible
+window.updateNavbarCart = updateNavbarCart;
 
 // Initialize components
-document.addEventListener("DOMContentLoaded", () => {
-  loadNavbar();
-  loadFooter();
-});
+
+loadNavbar();
+loadFooter();

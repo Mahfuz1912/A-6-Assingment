@@ -228,8 +228,8 @@ const updateCartBadge = () => {
     cartSubtotal.textContent = `Subtotal: $${subtotal.toFixed(2)}`;
 
   // Also update navbar cart if components.js is loaded
-  if (typeof updateNavbarCart === "function") {
-    updateNavbarCart();
+  if (typeof window.updateNavbarCart === "function") {
+    window.updateNavbarCart();
   }
 };
 
