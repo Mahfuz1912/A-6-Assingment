@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <title>Swift Cart</title>
     <link rel="stylesheet" href="./style.css" />
     <link
@@ -21,6 +22,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
   </head>
   <body>
     <!-- Navbar -->
@@ -29,7 +35,7 @@
     <!-- Product Details Section Start -->
     <section>
       <h1 class="text-3xl font-bold text-center my-8">Our Products</h1>
-      <div class="flex justify-center gap-3 mb-8" id="category-container"></div>
+      <div class="flex justify-center gap-3 mb-8 flex-wrap px-3" id="category-container"></div>
 
       <div
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-11/12 mx-auto mb-12"
