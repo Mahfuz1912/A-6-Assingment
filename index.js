@@ -67,8 +67,6 @@ const createProductCard = (product) => {
       </div>
     </div>
   `;
-
-  // Add event listeners for buttons
   productCard
     .querySelector(".details-btn")
     .addEventListener("click", () => showProductDetails(product));
@@ -112,7 +110,6 @@ const displayCategories = (categories) => {
     clickedBtn.classList.add("bg-indigo-600", "text-white");
   };
 
-  // ALL button
   const allBtn = document.createElement("button");
   allBtn.className = normalClasses;
   allBtn.textContent = "All";
@@ -127,7 +124,7 @@ const displayCategories = (categories) => {
 
   categoriesContainer.appendChild(allBtn);
 
-  // Dynamic categories
+// Add category buttons
   categories.forEach((category) => {
     const categoryBtn = document.createElement("button");
     categoryBtn.className = normalClasses;
@@ -158,13 +155,13 @@ const displayTrandingProducts = (products) => {
     .slice(0, 3);
   const trendingProductsContainer =
     document.getElementById("trending-products");
-  trendingProductsContainer.innerHTML = ""; // Clear spinner
+  trendingProductsContainer.innerHTML = "";
   sortedProducts.forEach((product) =>
     trendingProductsContainer.appendChild(createProductCard(product)),
   );
 };
 
-// Simple cart functionality with localStorage
+
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const saveCartToStorage = () => {
@@ -196,7 +193,7 @@ const showToast = (message, type = "success") => {
 
   const toast = document.createElement("div");
   toast.id = "cart-toast";
-  toast.className = `fixed top-20 right-4 z-50 alert ${alertClass} shadow-lg max-w-sm`;
+  toast.className = `fixed top-0 right-80 z-50 alert ${alertClass} shadow-lg `;
   toast.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${iconPath}" />
@@ -204,8 +201,6 @@ const showToast = (message, type = "success") => {
     <span>${message}</span>
   `;
   document.body.appendChild(toast);
-
-  // Auto remove after 3 seconds
   setTimeout(() => toast.remove(), 3000);
 };
 

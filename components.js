@@ -1,18 +1,15 @@
 // Shared Navbar Component
-const loadNavbar = () => {
+const Navbar = () => {
   const navbar = `
     <section class="w-11/12 mx-auto">
       <div class="navbar bg-base-100">
         <div class="navbar-start">
           <a href="./index.html" class="btn btn-ghost text-xl text-primary font-bold">SwiftCart</a>
         </div>
-
-        <!-- Desktop Menu -->
         <div class="navbar-center hidden lg:flex">
           <ul class="menu menu-horizontal px-1">
             <li><a href="./index.html" class="${window.location.pathname.includes("index") || window.location.pathname.endsWith("/") ? "active" : ""}">Home</a></li>
             <li><a href="./product.html" class="${window.location.pathname.includes("product") ? "active" : ""}">Products</a></li>
-
             <li><a href="#contact">Contact</a></li>
             <li><a href="#about">About</a></li>
           </ul>
@@ -20,7 +17,6 @@ const loadNavbar = () => {
 
         <div class="navbar-end">
           <div class="flex-none">
-            <!-- Shopping Cart -->
             <div class="dropdown dropdown-end">
               <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
                 <div class="indicator">
@@ -41,7 +37,6 @@ const loadNavbar = () => {
               </div>
             </div>
 
-            <!-- Hamburger Menu (Mobile) -->
             <div class="dropdown dropdown-end lg:hidden">
               <div tabindex="0" role="button" class="btn btn-ghost btn-circle" title="Menu">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -67,7 +62,7 @@ const loadNavbar = () => {
 };
 
 // Shared Footer Component
-const loadFooter = () => {
+const Footer = () => {
   const footer = `
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -132,7 +127,7 @@ const loadFooter = () => {
   document.getElementById("footer").innerHTML = footer;
 };
 
-// Update navbar cart badge from localStorage
+// Function to update cart count and subtotal in the navbar
 const updateNavbarCart = () => {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -152,10 +147,9 @@ const updateNavbarCart = () => {
     cartSubtotal.textContent = `Subtotal: $${subtotal.toFixed(2)}`;
 };
 
-// Make updateNavbarCart globally accessible
+// Expose updateNavbarCart to global scope so it can be called from index.js
 window.updateNavbarCart = updateNavbarCart;
 
-// Initialize components
 
-loadNavbar();
-loadFooter();
+Navbar();
+Footer();
